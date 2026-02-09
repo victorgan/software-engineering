@@ -1,0 +1,219 @@
+{
+  "main": {
+    "id": "f23947161419a13b",
+    "type": "split",
+    "children": [
+      {
+        "id": "7a3f5e93431866bc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f608b8545455b8af",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "04 Systems and Infrastructure/04 - Systems and Infrastructure MOC.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "04 - Systems and Infrastructure MOC"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "f983314c47fad6fe",
+    "type": "split",
+    "children": [
+      {
+        "id": "780ce46fb21bedbb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4d15b0a56930bb01",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "b027a057925d961e",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "faa7b64e106b847f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 436.5
+  },
+  "right": {
+    "id": "4c11b0cafc6a567a",
+    "type": "split",
+    "children": [
+      {
+        "id": "2fc01b52446c8614",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "823f04f10f8f080c",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "04 Systems and Infrastructure/04 - Systems and Infrastructure MOC.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 04 - Systems and Infrastructure MOC"
+            }
+          },
+          {
+            "id": "e8bc57ccd651680e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "04 Systems and Infrastructure/04 - Systems and Infrastructure MOC.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 04 - Systems and Infrastructure MOC"
+            }
+          },
+          {
+            "id": "e2594657851af263",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "aa5209ddf9f59b45",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "78662267ba344360",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "04 Systems and Infrastructure/04 - Systems and Infrastructure MOC.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 04 - Systems and Infrastructure MOC"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "f608b8545455b8af",
+  "lastOpenFiles": [
+    "02 Programming Languages and Paradigms/02 - Programming Languages and Paradigms MOC.md",
+    "00 MOC/Software Engineering - Map of Content.md",
+    "09 Machine Learning and AI/09 - Machine Learning and AI MOC.md",
+    "10 Human and Organizational/10 - Human and Organizational MOC.md",
+    "08 Security/08 - Security MOC.md",
+    "03 Data Management/03 - Data Management MOC.md",
+    "04 Systems and Infrastructure/04 - Systems and Infrastructure MOC.md",
+    "05 Software Design and Architecture/05 - Software Design and Architecture MOC.md",
+    "06 Development Process/06 - Development Process MOC.md",
+    "00-MOC/Software Engineering - Map of Content.md",
+    "10 Human and Organizational",
+    "09 Machine Learning and AI",
+    "08 Security",
+    "07 Reliability and Operations/07 - Reliability and Operations MOC.md",
+    "07 Reliability and Operations",
+    "06 Development Process",
+    "05 Software Design and Architecture",
+    "04 Systems and Infrastructure",
+    "03 Data Management",
+    "02 Programming Languages and Paradigms",
+    "01 Foundations/01 - Foundations MOC.md",
+    "01 Foundations",
+    "10-Human-and-Organizational/10 - Human and Organizational MOC.md",
+    "09-Machine-Learning-and-AI/09 - Machine Learning and AI MOC.md",
+    "07-Reliability-and-Operations/07 - Reliability and Operations MOC.md",
+    "06-Development-Process/06 - Development Process MOC.md",
+    "05-Software-Design-and-Architecture/05 - Software Design and Architecture MOC.md",
+    "04-Systems-and-Infrastructure/04 - Systems and Infrastructure MOC.md",
+    "02-Programming-Languages-and-Paradigms/02 - Programming Languages and Paradigms MOC.md",
+    "01-Foundations/01 - Foundations MOC.md"
+  ]
+}

@@ -101,6 +101,66 @@ Keeping systems running, performant, and recoverable. The difference between a d
 - **Health Checks** — Liveness probes, readiness probes, startup probes
 - **Redundancy** — No single points of failure, multi-AZ, multi-region
 
+### SRE Team Models
+- **Embedded SRE** — SREs sit within product teams, deep product context
+- **Centralized / Platform SRE** — Shared SRE team provides tools and platforms for all teams
+- **Consulting SRE** — SREs advise teams on reliability, teams own their services
+- **SRE vs DevOps** — SRE is a specific implementation of DevOps principles with prescriptive practices
+- **Service Ownership** — "You build it, you run it" — teams own production behavior of their services
+- **Production Readiness Reviews (PRR)** — Checklist before a new service goes to production (monitoring, alerting, runbooks, load testing, failover)
+
+---
+
+## [[Disaster Recovery & Business Continuity]]
+
+### Backup & Restore
+- **Backup Strategies** — Full, incremental, differential backups
+- **RPO (Recovery Point Objective)** — Maximum acceptable data loss (time-based)
+- **RTO (Recovery Time Objective)** — Maximum acceptable downtime
+- **Backup Testing** — Regular restore drills, verify backups actually work
+- **Point-in-Time Recovery (PITR)** — Database WAL replay, continuous archiving
+
+### Failover Strategies
+- **Active-Passive** — Standby takes over on primary failure, cold/warm/hot standby
+- **Active-Active** — Multiple active regions, traffic split, conflict resolution needed
+- **DNS Failover** — Route53 health checks, failover routing policies
+- **Database Failover** — Automatic promotion of replicas, split-brain prevention
+- **Multi-Region** — Cross-region replication, regional isolation, global load balancing
+
+### Disaster Recovery Tiers
+- **Backup & Restore** — Cheapest, slowest recovery (hours)
+- **Pilot Light** — Minimal always-on infrastructure, scale up on failure
+- **Warm Standby** — Scaled-down copy of production, faster failover (minutes)
+- **Multi-Site Active-Active** — Full redundancy, near-zero downtime, highest cost
+
+### Business Continuity
+- **DR Runbooks** — Step-by-step recovery procedures per service
+- **DR Drills** — Regular simulated failovers, tabletop exercises
+- **Dependency Mapping** — Know your critical path and upstream/downstream dependencies
+- **Blast Radius Reduction** — Cell-based architecture, shuffle sharding, failure domains
+
+---
+
+## [[Traffic Management]]
+
+### Traffic Shifting
+- **Weighted Routing** — Gradually shift traffic between deployments (see [[CI-CD]])
+- **Traffic Mirroring / Shadowing** — Duplicate production traffic to test environment without affecting users
+- **Dark Traffic** — Send real traffic to new service version, discard responses, compare
+- **Geographic Routing** — Route users to nearest region, latency-based routing
+
+### Load Shedding
+- **Priority-Based Shedding** — Drop low-priority requests under load to protect critical paths
+- **Admission Control** — Reject requests early when system is at capacity
+- **Throttling** — Per-client rate limits, adaptive throttling based on system health
+- **Backpressure Propagation** — Signal upstream to slow down rather than buffering until OOM
+
+### Configuration Management in Production
+- **Feature Flags** — Runtime configuration changes without deploys (see [[CI-CD]])
+- **Dynamic Configuration** — Config servers (Consul, etcd), runtime tuning without restarts
+- **Configuration Drift** — Detect and remediate drift between intended and actual state
+- **Secrets Rotation** — Automated rotation of credentials, certificates, API keys
+
 ---
 
 ## [[Performance Engineering]]
@@ -148,4 +208,4 @@ Keeping systems running, performant, and recoverable. The difference between a d
 
 ---
 
-#reliability #sre #operations #observability #performance
+#reliability #sre #operations #observability #performance #disaster-recovery #traffic-management

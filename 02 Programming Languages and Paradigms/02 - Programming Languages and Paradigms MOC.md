@@ -37,15 +37,8 @@ How we express computation. The choice of language and paradigm shapes how you t
 
 ### Concurrent & Parallel Programming
 - **Concurrency vs Parallelism** — Dealing with many things vs doing many things at once
-- **Threads** — POSIX threads, thread pools, thread safety
-- **Synchronization** — Mutexes, semaphores, monitors, condition variables
-- **Deadlock & Livelock** — Prevention, avoidance, detection
-- **Lock-Free Programming** — Compare-and-swap (CAS), atomic operations
-- **Actor Model** — Isolated actors, message passing (Erlang, Akka)
-- **CSP (Communicating Sequential Processes)** — Channels, goroutines (Go)
-- **Async/Await** — Event loops, coroutines, futures/promises
-- **Data Parallelism** — SIMD, GPU computing, MapReduce
-- **Reactive Programming** — Streams, observables, backpressure (RxJS, Project Reactor)
+- **Languages** — Go, Erlang, Elixir, Rust, Java, Kotlin, Clojure, Scala
+- See [[Concurrency]] for dedicated deep-dive
 
 ### Logic Programming
 - **Declarative Rules** — Facts and rules, inference engines
@@ -153,4 +146,76 @@ How we express computation. The choice of language and paradigm shapes how you t
 
 ---
 
-#programming-languages #paradigms #type-systems
+---
+
+## [[Concurrency]]
+
+### Fundamentals
+- **Concurrency vs Parallelism** — Dealing with many things at once (interleaving) vs doing many things at once (simultaneous execution)
+- **Threads vs Processes** — Shared memory vs isolated memory, lighter vs heavier weight
+- **Thread Safety** — Code that functions correctly when accessed from multiple threads
+- **Race Conditions** — Outcome depends on non-deterministic ordering of operations
+- **Critical Sections** — Code regions that must not execute concurrently
+
+### Synchronization Primitives
+- **Mutexes / Locks** — Mutual exclusion, only one thread holds the lock at a time
+- **Read-Write Locks** — Multiple concurrent readers, exclusive writer
+- **Semaphores** — Counting-based access control, limit concurrent access to a resource
+- **Monitors** — Mutex + condition variables bundled together (Java synchronized)
+- **Condition Variables** — Wait/notify for thread coordination
+- **Barriers** — Synchronization point where all threads must arrive before any proceed
+- **Spinlocks** — Busy-wait locks, useful for very short critical sections
+
+### Deadlocks & Livelocks
+- **Deadlock Conditions** — Mutual exclusion, hold-and-wait, no preemption, circular wait (all four required)
+- **Deadlock Prevention** — Lock ordering, timeout-based acquisition, try-lock
+- **Deadlock Detection** — Wait-for graphs, cycle detection
+- **Livelock** — Threads actively changing state but making no progress
+- **Priority Inversion** — High-priority thread blocked by low-priority thread holding a lock (priority inheritance as solution)
+
+### Lock-Free & Wait-Free Programming
+- **Compare-and-Swap (CAS)** — Atomic read-modify-write, basis of lock-free data structures
+- **Atomic Operations** — Atomic integers, atomic references, memory ordering
+- **Memory Ordering** — Sequential consistency, acquire-release, relaxed ordering
+- **Lock-Free Data Structures** — Lock-free queues, stacks, hash maps
+- **Wait-Free Algorithms** — Every thread makes progress in bounded steps (stronger than lock-free)
+- **ABA Problem** — Value changes A→B→A, CAS doesn't detect intermediate change
+
+### Concurrency Models
+- **Threads & Shared Memory** — Traditional model, requires synchronization (Java, C++, Python)
+- **Actor Model** — Isolated actors communicate via asynchronous messages, no shared state (Erlang/OTP, Akka, Orleans)
+- **CSP (Communicating Sequential Processes)** — Channels as synchronization points, goroutines (Go), core.async (Clojure)
+- **Software Transactional Memory (STM)** — Transactions on shared memory, automatic retry on conflict (Haskell, Clojure)
+- **Futures & Promises** — Represent a value that will be available later, composable (Java CompletableFuture, Scala Future)
+- **Async/Await** — Cooperative multitasking, event loop, non-blocking I/O (JavaScript, Python asyncio, Rust async, C#, Kotlin coroutines)
+- **Green Threads / Fibers** — User-space threads, lightweight scheduling (Go goroutines, Erlang processes, Java virtual threads / Project Loom)
+- **Reactive Programming** — Streams, observables, backpressure (RxJS, Project Reactor, Akka Streams)
+
+### Data Parallelism
+- **SIMD** — Single instruction, multiple data, vectorized operations
+- **GPU Computing** — CUDA, OpenCL, massively parallel workloads
+- **MapReduce** — Distribute data, process in parallel, combine results
+- **Fork-Join** — Recursive task decomposition (Java ForkJoinPool, work stealing)
+- **Parallel Collections** — Parallel streams (Java), rayon (Rust), multiprocessing (Python)
+
+### Concurrency Hazards & Patterns
+- **Data Races** — Unsynchronized access to shared mutable data (undefined behavior in C/C++/Rust)
+- **Thread Starvation** — Threads unable to acquire resources due to unfair scheduling
+- **False Sharing** — Cache line contention between threads accessing different but adjacent data
+- **Double-Checked Locking** — Lazy initialization pattern, memory model pitfalls
+- **Thread Pools** — Bound concurrency, reuse threads, avoid thread creation overhead
+- **Producer-Consumer** — Bounded buffer, blocking queue coordination
+- **Readers-Writer Pattern** — Multiple readers, single writer (see read-write locks above)
+- **Thread-Local Storage** — Per-thread data, avoids sharing entirely
+
+### Language-Specific Concurrency
+- **Go** — Goroutines + channels, select statement, sync package, "share memory by communicating"
+- **Rust** — Ownership prevents data races at compile time, Send/Sync traits, tokio async runtime
+- **Java** — java.util.concurrent, virtual threads (Project Loom), synchronized/volatile
+- **Python** — GIL (Global Interpreter Lock) limits true parallelism, multiprocessing for CPU-bound, asyncio for I/O-bound
+- **Erlang/Elixir** — BEAM VM, lightweight processes (millions), OTP supervision trees, fault tolerance through isolation
+- **JavaScript** — Single-threaded event loop, Web Workers for parallelism, async/await
+
+---
+
+#programming-languages #paradigms #type-systems #concurrency

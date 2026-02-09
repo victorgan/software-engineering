@@ -21,6 +21,7 @@
 
 - [[02 - Programming Languages and Paradigms MOC]]
   - [[Programming Paradigms]] — Imperative, OOP, Functional, Logic, Concurrent
+  - [[Concurrency]] — Threads, Locks, Async/Await, Actor Model, CSP, Lock-Free Programming
   - [[Type Systems]] — Static vs Dynamic, Strong vs Weak, Type Inference, Generics, Algebraic Types
   - [[Language Implementation]] — Compilers, Interpreters, JIT, ASTs, Parsing, Bytecode
   - [[Memory Models]] — Stack vs Heap, Garbage Collection, Reference Counting, Ownership (Rust), Manual Management
@@ -33,6 +34,7 @@
 - [[03 - Data Management MOC]]
   - [[Relational Databases]] — SQL, Normalization, Joins, Indexing, Query Optimization, Transactions
   - [[NoSQL Databases]] — Document, Key-Value, Column-Family, Graph, Time-Series
+  - [[Database Selection Guide]] — Decision Factors, Tradeoffs, Polyglot Persistence Patterns
   - [[Data Modeling]] — ER Diagrams, Schema Design, Denormalization, Migrations
   - [[Caching]] — Strategies, Redis, Memcached, CDN Caching, Cache Invalidation
   - [[Data Pipelines]] — ETL/ELT, Streaming vs Batch, Kafka, Data Lakes, Data Warehouses
@@ -46,7 +48,11 @@
   - [[Operating Systems]] — Processes, Threads, Memory Management, File Systems, I/O, Scheduling
   - [[Networking]] — TCP/IP, HTTP, DNS, TLS, Load Balancing, CDNs, WebSockets
   - [[Distributed Systems]] — Consensus, CAP Theorem, Replication, Sharding, Message Queues
-  - [[Cloud and Containers]] — AWS/GCP/Azure, Docker, Kubernetes, Serverless, IaC
+  - [[Cloud and Containers]] — Docker, Kubernetes, Serverless, IaC
+  - [[AWS Services Guide]] — Compute, Storage, Databases, Networking, Messaging, ML, Security
+  - [[GCP Services Guide]] — Compute, Storage, Databases, Networking, Data Analytics, ML, Security
+  - [[Google Internal Technologies]] — Borg, Spanner, Bigtable, Dremel, Stubby, Zanzibar, BeyondCorp
+  - [[Google Internal → External Mapping]] — Internal ↔ Open Source ↔ GCP equivalents
 
 ---
 
@@ -80,7 +86,9 @@
 - [[07 - Reliability and Operations MOC]]
   - [[Observability]] — Logging, Metrics, Tracing, Dashboards, Alerting
   - [[Incident Management]] — On-Call, Runbooks, Post-Mortems, Blameless Culture
-  - [[Site Reliability Engineering]] — SLAs, SLOs, SLIs, Error Budgets, Toil Reduction
+  - [[Site Reliability Engineering]] — SLAs, SLOs, SLIs, Error Budgets, Toil Reduction, Production Readiness
+  - [[Disaster Recovery & Business Continuity]] — Backup/Restore, Failover, DR Tiers, RPO/RTO
+  - [[Traffic Management]] — Traffic Shifting, Load Shedding, Dynamic Configuration
   - [[Performance Engineering]] — Profiling, Benchmarking, Load Testing, Capacity Planning, Chaos Engineering
 
 ---

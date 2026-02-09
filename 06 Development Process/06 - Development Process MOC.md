@@ -119,6 +119,49 @@ The practices, tools, and methodologies that make software teams effective. Proc
 - **A/B Testing** — Route users to different versions, measure outcomes
 - **Dark Launches** — Deploy code without exposing to users, shadow traffic
 - **Rollback** — Automated rollback on failure detection, database rollback challenges
+- **Immutable Infrastructure** — Never patch in place, replace instances entirely with new images
+- **Zero-Downtime Deployments** — Drain connections, graceful shutdown, readiness gates, pre-stop hooks
+
+### Progressive Delivery
+- **Concept** — Gradual, controlled exposure of changes to users with automated analysis
+- **Canary Analysis** — Automated comparison of canary vs baseline metrics (Kayenta, Flagger)
+- **Traffic Shifting** — Weighted routing to gradually move traffic to new version (see [[Traffic Management]])
+- **Automated Rollback** — Trigger rollback when canary metrics degrade beyond threshold
+- **Argo Rollouts / Flagger** — Kubernetes-native progressive delivery controllers
+
+### GitOps Deployment
+- **Principles** — Git as single source of truth, declarative desired state, automated reconciliation
+- **Pull-Based Deployment** — Agent in cluster pulls desired state from Git (Argo CD, Flux)
+- **Push-Based Deployment** — CI pipeline pushes changes to cluster (traditional CI/CD)
+- **Drift Detection** — Continuously compare actual state vs desired state, auto-remediate
+- **Multi-Cluster GitOps** — ApplicationSets (Argo CD), Kustomize overlays per environment
+
+### Database Migrations in Deployment
+- **Schema Migration Tools** — Flyway, Liquibase, Alembic, golang-migrate, Prisma Migrate
+- **Backward-Compatible Migrations** — Expand-and-contract pattern, avoid breaking running code
+- **Online Schema Changes** — gh-ost, pt-online-schema-change for zero-downtime DDL on large tables
+- **Data Migrations** — Backfill scripts, dual-write patterns during transition
+- **Migration Ordering** — Deploy new code that handles both schemas → migrate schema → remove old code path
+
+### Deployment Verification
+- **Smoke Tests** — Minimal tests run post-deploy to verify basic functionality
+- **Synthetic Monitoring** — Automated transactions mimicking real user flows in production
+- **Deploy Observability** — Correlate deployments with metrics changes (deploy markers in Grafana/Datadog)
+- **Approval Gates** — Manual or automated gates between environments (staging → production)
+- **Deployment Frequency** — DORA metric: how often code is deployed to production
+
+### Artifact Management
+- **Container Registries** — Docker Hub, ECR, GCR, GHCR, Harbor (see [[Cloud and Containers]])
+- **Package Registries** — npm, PyPI, Maven Central, private registries (Artifactory, Nexus)
+- **Artifact Versioning** — Immutable artifacts, tagged by commit SHA or semantic version
+- **Image Signing & Verification** — Cosign, Notary, supply chain security (SLSA framework)
+- **Bill of Materials (SBOM)** — Track dependencies in deployed artifacts (Syft, CycloneDX)
+
+### Environment Management
+- **Environment Parity** — Dev, staging, production should be as similar as possible
+- **Ephemeral Environments** — Spin up per-PR preview environments, tear down after merge
+- **Environment Promotion** — Promote the same artifact through environments, never rebuild
+- **Infrastructure Provisioning** — Terraform/Pulumi per environment (see [[Cloud and Containers]])
 
 ### Release Engineering
 - **Semantic Versioning (SemVer)** — MAJOR.MINOR.PATCH
@@ -186,4 +229,4 @@ The practices, tools, and methodologies that make software teams effective. Proc
 
 ---
 
-#process #git #testing #cicd #agile
+#process #git #testing #cicd #agile #deployment #gitops
