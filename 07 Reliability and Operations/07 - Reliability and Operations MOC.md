@@ -208,4 +208,49 @@ Keeping systems running, performant, and recoverable. The difference between a d
 
 ---
 
-#reliability #sre #operations #observability #performance #disaster-recovery #traffic-management
+## Cost Engineering / FinOps
+
+### Cloud Cost Fundamentals
+- **Pay-Per-Use vs Reserved vs Spot** — On-demand (flexible, expensive), reserved (1-3yr commitment, 30-60% savings), spot/preemptible (up to 90% savings, can be interrupted)
+- **Cost Allocation Tags** — Tag resources by team, project, environment; required for cost visibility and showback/chargeback
+- **Cost Anomaly Detection** — Automated alerts for unexpected spending spikes, AWS Cost Anomaly Detection, budget alerts
+
+### Right-Sizing
+- **Instance Type Selection** — Match instance family to workload (compute-optimized, memory-optimized, general purpose, GPU)
+- **CPU / Memory Utilization Analysis** — Most instances run at 10-30% utilization; downsizing often has no performance impact
+- **Auto-Scaling Efficiency** — Scale-to-zero for dev/staging, aggressive scale-down policies, scheduled scaling for predictable patterns
+
+### Reserved Capacity
+- **Reserved Instances (AWS)** — Standard vs convertible, all-upfront/partial/no-upfront, 1yr vs 3yr, scope (regional vs zonal)
+- **Savings Plans (AWS)** — Compute Savings Plans (flexible across instance types), EC2 Instance Savings Plans (specific family)
+- **Committed Use Discounts (GCP)** — Spend-based or resource-based commitments, automatic application
+- **Commitment Tradeoffs** — Lock-in risk, capacity planning accuracy required, mix of reserved + on-demand for flexibility
+
+### Spot / Preemptible
+- **Fault-Tolerant Workloads** — Batch processing, CI/CD runners, stateless web workers, data processing
+- **Spot Interruption Handling** — 2-minute warning (AWS), graceful shutdown, checkpointing, instance diversification
+- **Mixed Instance Strategies** — Spot Fleet, mixed instance policies, fallback to on-demand, Karpenter (Kubernetes)
+
+### Storage Cost Optimization
+- **Lifecycle Policies** — Auto-transition objects to cheaper tiers (S3 Standard → Infrequent Access → Glacier)
+- **Storage Class Transitions** — Hot/warm/cold/archive tiers, retrieval costs, minimum storage duration charges
+- **Data Transfer Costs** — Egress fees (often the hidden cost), cross-region transfer, NAT Gateway costs, VPC endpoints to avoid transfer fees
+- **Compression** — Compress data at rest and in transit, columnar formats (Parquet) for analytics, gzip/zstd for logs
+
+### Unit Economics
+- **Cost Per Request** — Total infrastructure cost / total requests, track over time
+- **Cost Per User** — Infrastructure cost / MAU, benchmark against revenue per user
+- **Cost Per Transaction** — Database + compute + storage cost per business transaction
+- **Tracking Cost Efficiency** — Cost per unit of value should decrease over time as you scale and optimize
+
+### FinOps Practices
+- **Cost Visibility** — Dashboards showing real-time spend by team/service/environment, trend analysis
+- **Showback / Chargeback** — Showback: show teams their costs (awareness). Chargeback: bill teams for their usage (accountability).
+- **Budgets and Alerts** — Per-team budgets, threshold alerts (50%, 80%, 100%), forecasted overspend alerts
+- **Tagging Strategy** — Mandatory tags (team, environment, project, cost-center), tag enforcement policies, untagged resource reports
+- **FinOps Team Models** — Centralized FinOps team, federated (embedded in engineering), hybrid; FinOps Foundation maturity model (crawl, walk, run)
+- **Tools** — CloudHealth (VMware), Kubecost (Kubernetes cost allocation), Infracost (IaC cost estimation in PRs), AWS Cost Explorer, GCP Billing Reports, Vantage, Spot.io
+
+---
+
+#reliability #sre #operations #observability #performance #disaster-recovery #traffic-management #finops #cost-engineering

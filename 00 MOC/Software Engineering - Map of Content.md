@@ -12,7 +12,7 @@
   - [[Data Structures]] — Arrays, Linked Lists, Trees, Graphs, Hash Maps, Heaps, Tries
   - [[Algorithms]] — Sorting, Searching, Graph Algorithms, Dynamic Programming, Greedy, Backtracking
   - [[Computational Complexity]] — Big-O, P vs NP, Space Complexity, Amortized Analysis
-  - [[Mathematics for CS]] — Discrete Math, Linear Algebra, Probability, Statistics, Information Theory
+  - [[Mathematics for CS]] — Discrete Math, Linear Algebra, Probability, Statistics, Information Theory, Queueing Theory
 
 ---
 
@@ -38,6 +38,9 @@
   - [[Data Modeling]] — ER Diagrams, Schema Design, Denormalization, Migrations
   - [[Caching]] — Strategies, Redis, Memcached, CDN Caching, Cache Invalidation
   - [[Data Pipelines]] — ETL/ELT, Streaming vs Batch, Kafka, Data Lakes, Data Warehouses
+  - [[Database Operations]] — Connection Pooling, Query Analysis, Maintenance, Backups, Schema Migrations
+  - [[Search Systems]] — Inverted Indexes, Text Analysis, Ranking, Full-Text Search, Vector Search
+  - [[Data Serialization Formats]] — JSON, Protobuf, Avro, Parquet, Arrow, Schema Registries
 
 ---
 
@@ -87,6 +90,7 @@
   - [[Disaster Recovery & Business Continuity]] — Backup/Restore, Failover, DR Tiers, RPO/RTO
   - [[Traffic Management]] — Traffic Shifting, Load Shedding, Dynamic Configuration
   - [[Performance Engineering]] — Profiling, Benchmarking, Load Testing, Capacity Planning, Chaos Engineering
+  - [[Cost Engineering / FinOps]] — Cloud Costs, Right-Sizing, Reserved Capacity, Spot Instances, Unit Economics
 
 ---
 
@@ -136,6 +140,36 @@
   - [[AWS vs GCP — Service Mapping]] — Side-by-side service equivalents
   - [[Google Internal Technologies]] — Borg, Spanner, Bigtable, Dremel, Stubby, Zanzibar, BeyondCorp
   - [[Google Internal → External Mapping]] — Internal ↔ Open Source ↔ GCP equivalents
+
+---
+
+## 🌐 12. Web & Mobile Development
+*Building user-facing applications — the most visible layer of our work.*
+
+- [[12 - Web and Mobile Development MOC]]
+  - [[Web Fundamentals]] — HTML, CSS, DOM, Browser Rendering Pipeline, Critical Rendering Path
+  - [[JavaScript & the Browser]] — Event Loop, Web APIs, Web Workers, Service Workers, Module Systems
+  - [[Frontend Frameworks]] — React, Vue, Angular, Svelte, Signals, State Management, SSR/CSR/SSG
+  - [[Web Performance]] — Core Web Vitals, Lighthouse, Code Splitting, Image Optimization, Tree Shaking
+  - [[Build Tooling]] — Webpack, Vite, esbuild, Turbopack, Babel, SWC, PostCSS, Tailwind, Monorepo Tools
+  - [[Accessibility]] — WCAG, ARIA, Semantic HTML, Screen Readers, Keyboard Navigation
+  - [[Browser APIs & PWAs]] — Service Workers, Cache API, Web Push, Offline-First, WebSockets, WebRTC
+  - [[Frontend Testing]] — Testing Library, Visual Regression, Playwright, Cypress, Storybook
+  - [[Mobile Development]] — iOS (Swift, SwiftUI), Android (Kotlin, Compose), React Native, Flutter, App Distribution
+  - [[Internationalization]] — Unicode, ICU Message Format, Locale-Aware Formatting, RTL, Time Zones
+
+---
+
+## 🛠️ 13. Developer Tooling & Productivity
+*The tools that multiply developer effectiveness — mastering them is a career-long leverage multiplier.*
+
+- [[13 - Developer Tooling and Productivity MOC]]
+  - [[Editors & IDEs]] — VS Code, JetBrains, Vim/Neovim, Emacs, LSP, DAP
+  - [[Shell & Terminal]] — Bash/Zsh, Shell Scripting, Dotfiles, tmux, Modern CLI Tools
+  - [[Debugging]] — Interactive Debuggers, Memory Debuggers, Profilers, Log-Based Debugging
+  - [[Package Managers]] — npm/yarn/pnpm, pip/uv/poetry, Cargo, Go Modules, Maven/Gradle
+  - [[Containers for Development]] — Dev Containers, Docker Compose, Testcontainers
+  - [[AI-Assisted Development]] — Code Completion, Chat-Based Coding, AI Code Review, Limitations
 
 ---
 

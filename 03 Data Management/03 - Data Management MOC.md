@@ -298,4 +298,139 @@ Storing, retrieving, transforming, and moving data. Arguably the most critical c
 
 ---
 
-#data #databases #caching #pipelines #database-selection #sharding #partitioning #replication
+## Database Operations
+
+### Connection Management
+- **Connection Pooling** — Reuse database connections to avoid per-request overhead; PgBouncer (Postgres, transaction/session pooling), HikariCP (JVM, fastest JDBC pool), pgpool-II (Postgres, also does load balancing)
+- **Connection Limits** — max_connections (Postgres default 100), each connection consumes memory (~10MB), more connections ≠ more throughput
+- **Idle Timeout** — Reclaim unused connections, idle_in_transaction_session_timeout, connection lifetime limits
+- **Pool Sizing** — Formula: connections ≈ (core_count × 2) + disk_spindles; too many connections cause contention and context switching
+
+### Query Analysis
+- **EXPLAIN / EXPLAIN ANALYZE** — EXPLAIN shows planned execution; EXPLAIN ANALYZE actually executes and shows real timing, rows, loops
+- **Query Plans** — Seq Scan, Index Scan, Index Only Scan, Bitmap Scan, Nested Loop, Hash Join, Merge Join, Sort, Aggregate
+- **Sequential vs Index Scans** — Planner chooses based on selectivity; low selectivity → seq scan can be faster than index scan
+- **Cost Estimation** — startup_cost..total_cost, rows estimate, width; based on table statistics (pg_statistic)
+- **Slow Query Logs** — log_min_duration_statement (Postgres), slow_query_log (MySQL), identifying expensive queries in production
+
+### Maintenance
+- **VACUUM / ANALYZE (Postgres)** — VACUUM reclaims dead tuples from MVCC, ANALYZE updates planner statistics, autovacuum handles this automatically but may need tuning
+- **Compaction (LSM-Tree Databases)** — Merging SSTables, leveled vs size-tiered compaction, write amplification (Cassandra, RocksDB)
+- **Index Rebuilding** — REINDEX (Postgres), index fragmentation, CONCURRENTLY option to avoid locking
+- **Table Bloat** — Dead rows consuming space, pg_repack for online table compaction, monitoring bloat with pgstattuple
+- **Statistics Collection** — ANALYZE frequency, default_statistics_target, extended statistics for correlated columns
+
+### Replication Operations
+- **Replication Lag Monitoring** — pg_stat_replication (Postgres), SHOW SLAVE STATUS (MySQL), alerting on lag thresholds
+- **Promoting Replicas** — pg_promote() (Postgres), failover procedures, split-brain prevention, fencing
+- **Failover Procedures** — Automated (Patroni, repmgr, Orchestrator) vs manual, DNS updates, connection string updates
+- **Logical vs Physical Replication** — Physical: byte-for-byte WAL shipping, all databases. Logical: table-level, cross-version, selective, allows writes on replica.
+
+### Backup & Recovery
+- **pg_dump / pg_restore** — Logical backups, custom format (-Fc), parallel restore (-j), schema-only (--schema-only), selective table backup
+- **Point-in-Time Recovery (PITR)** — Continuous WAL archiving + base backup, restore to any point in time, recovery_target_time
+- **WAL Archiving** — archive_command, archive_mode, WAL-G (modern backup tool), pgBackRest (parallel backup/restore, incremental)
+- **Snapshot-Based Backups** — Storage-level snapshots (EBS, LVM), fast but requires filesystem quiesce or pg_start_backup
+- **Backup Testing** — Regularly restore backups to verify, automate restore testing, document RTO/RPO (see [[Disaster Recovery & Business Continuity]])
+
+### Monitoring
+- **Key Metrics** — Active connections, queries/sec, cache hit ratio (should be >99%), replication lag, disk usage, transaction rate, lock waits
+- **pg_stat_statements** — Track query statistics (calls, total_time, mean_time, rows), identify top queries by time/calls
+- **Slow Query Analysis** — Identifying expensive queries, correlating with application behavior, query fingerprinting
+- **Tools** — pgMonitor, Datadog Postgres integration, CloudWatch (RDS), pgAdmin, pg_stat_activity for active queries
+
+### Schema Migrations in Production
+- **Online DDL** — Adding columns (nullable or with default), creating indexes CONCURRENTLY, ALTER TABLE challenges with large tables
+- **Zero-Downtime Migrations** — Backward-compatible changes only, no column renames/removes while old code runs
+- **Expand-Contract Pattern** — Phase 1: add new column/table (expand), Phase 2: backfill + dual-write, Phase 3: switch reads, Phase 4: remove old (contract)
+- **Backward-Compatible Changes** — Add columns (nullable), add tables, add indexes; avoid: remove columns, rename columns, add NOT NULL without default
+- **Migration Tools** — Flyway (Java, SQL-based, versioned), Alembic (Python/SQLAlchemy, autogenerate), golang-migrate, Prisma Migrate, Liquibase (XML/YAML/SQL, rollback support)
+
+---
+
+## Search Systems
+
+### Inverted Index
+- **Tokenization** — Breaking text into tokens (words), analyzers, character filters, token filters
+- **Posting Lists** — For each term, a list of documents containing it, with positions and frequencies
+- **Term Frequency (TF)** — How often a term appears in a document; higher TF → more relevant
+- **Document Frequency (DF)** — How many documents contain the term; higher DF → less discriminating (common words)
+
+### Text Analysis
+- **Analyzers** — Pipeline of character filters → tokenizer → token filters; standard, simple, whitespace, language-specific, custom
+- **Tokenizers** — Standard (word boundaries), keyword (entire input as one token), pattern (regex-based), path hierarchy
+- **Filters** — Lowercase, stop words, stemming (algorithmic: Porter, Snowball), lemmatization (dictionary-based), synonyms, n-grams, edge n-grams
+- **Stop Words** — Common words (the, is, at) excluded from indexing to reduce index size and improve relevance
+- **Synonyms** — Synonym expansion at index or query time, synonym graphs, trade-off: flexibility vs index size
+
+### Ranking & Relevance
+- **TF-IDF** — Term Frequency × Inverse Document Frequency; classic relevance scoring, weights rare terms higher
+- **BM25** — Improved TF-IDF, Okapi BM25, saturation of term frequency, document length normalization; default in Elasticsearch/Lucene
+- **Vector Similarity** — Cosine similarity, dot product, Euclidean distance; used for semantic search with embeddings
+- **Learning to Rank** — Use ML to learn ranking functions from user behavior (clicks, conversions), feature engineering, RankNet, LambdaMART
+- **Boosting** — Increase/decrease relevance of specific fields or query clauses, function scoring, decay functions (recency, proximity)
+
+### Search Architecture
+- **Sharding** — Distribute index across nodes for scale, routing queries to relevant shards
+- **Replication** — Copies of each shard for fault tolerance and read throughput
+- **Near-Real-Time Indexing** — Refresh interval (default 1s in Elasticsearch), trade-off between indexing latency and search visibility
+- **Segment Merging** — Lucene segments, background merging, force merge for read-heavy indexes, write amplification
+
+### Query Features
+- **Full-Text Search** — Match queries, multi-match, phrase matching, slop (proximity), fuzziness
+- **Faceted Search** — Aggregations for filtering (category counts, price ranges, ratings), post-filter for facet accuracy
+- **Autocomplete / Typeahead** — Edge n-grams, completion suggesters, search-as-you-type fields, debouncing
+- **Fuzzy Matching** — Edit distance (Levenshtein), configurable fuzziness, phonetic matching (Soundex, Metaphone)
+- **Highlighting** — Return matching fragments with highlighted terms, configurable pre/post tags
+- **Aggregations** — Metric (avg, sum, min, max), bucket (terms, histogram, date_histogram, range), pipeline aggregations
+
+### Tools
+- **Elasticsearch / OpenSearch** — Distributed, Lucene-based, REST API, rich query DSL, aggregations, ELK/EFK stack, Kibana/OpenSearch Dashboards
+- **Solr** — Apache Lucene-based, mature, SolrCloud for distributed mode, strong faceted search
+- **Meilisearch** — Rust-based, typo-tolerant, instant search, simple API, good developer experience, limited aggregations
+- **Typesense** — C++-based, typo-tolerant, easy to operate, geo search, good for small-medium datasets
+- **PostgreSQL Full-Text Search** — tsvector/tsquery, GIN indexes, ts_rank, good enough for many applications without a separate search service
+
+### Vector Search
+- **Embedding-Based Retrieval** — Convert text/images to dense vectors, search by similarity rather than keyword matching (see [[Natural Language Processing]])
+- **ANN Algorithms** — HNSW (hierarchical navigable small worlds, high recall), IVF (inverted file index, faster at scale), PQ (product quantization, compression)
+- **pgvector** — PostgreSQL extension for vector similarity search, ivfflat and hnsw indexes, integrates with existing Postgres queries
+- **Dedicated Vector Databases** — Pinecone (managed, serverless), Weaviate (open source, hybrid search), Qdrant (Rust-based, filtering), Milvus (open source, GPU-accelerated), Chroma (lightweight, Python-native)
+
+---
+
+## Data Serialization Formats
+
+### Text Formats
+- **JSON** — Schema-less, human-readable, verbose, ubiquitous (APIs, config, NoSQL), no comments (JSONC/JSON5 add them), limited types (no dates, binary)
+- **XML** — Schema support (XSD), namespaces, XSLT transforms, verbose, SOAP/legacy APIs, still used in enterprise/config (Maven pom.xml, Android layouts)
+- **YAML** — Superset of JSON, indentation-based, anchors/aliases, multi-document, used in config (Kubernetes, CI/CD, Ansible), gotchas (Norway problem, implicit typing)
+- **TOML** — Minimal, unambiguous, explicit types, good for config files (Cargo.toml, pyproject.toml), less suitable for deeply nested data
+
+### Binary Formats
+- **Protocol Buffers (Protobuf)** — Schema-defined (.proto files), compact binary encoding, backward/forward compatible, code generation, gRPC default (see [[API Design]])
+- **Avro** — Schema evolution (reader/writer schemas), self-describing (schema embedded), Kafka default serialization, good for data pipelines
+- **MessagePack** — Binary JSON, compact, schema-less, faster than JSON, cross-language, used in Redis/Fluentd
+- **CBOR** — Concise Binary Object Representation, IETF standard (RFC 8949), self-describing, designed for constrained environments (IoT)
+- **FlatBuffers** — Zero-copy deserialization (access data without unpacking), Google, used in games and performance-critical paths
+- **Cap'n Proto** — Zero-copy, no encoding/decoding step, mmap-friendly, created by original Protobuf author
+
+### Columnar Formats
+- **Parquet** — Column-oriented, efficient compression (per-column encoding), predicate pushdown, row groups, Apache ecosystem (Spark, Hive, Presto), de facto standard for analytics
+- **ORC** — Optimized Row Columnar, Hive-optimized, ACID support, similar to Parquet, stronger in Hive ecosystem
+- **Arrow** — In-memory columnar format, zero-copy IPC (inter-process communication), language-agnostic, standard for data interchange between systems (Pandas, Spark, DuckDB)
+
+### Schema Management
+- **Schema Registries** — Confluent Schema Registry (Kafka), store and version schemas, enforce compatibility at produce time
+- **Compatibility Modes** — Backward (new schema reads old data), forward (old schema reads new data), full (both), none
+- **Schema Evolution Strategies** — Add optional fields, never remove required fields, use field IDs not names (Protobuf), union types (Avro)
+
+### Choosing a Format
+- **Human-Readability vs Performance** — JSON/YAML for config and debugging, Protobuf/Avro for production data, Parquet for analytics
+- **Schema Enforcement** — Protobuf/Avro enforce schemas and catch errors early; JSON/YAML are flexible but error-prone
+- **Language Support** — JSON universal, Protobuf/Avro have code generation for most languages, Parquet/Arrow have strong Python/JVM support
+- **Use Case Mapping** — API payloads (JSON, Protobuf), config files (YAML, TOML), event streaming (Avro, Protobuf), analytics storage (Parquet), in-memory processing (Arrow)
+
+---
+
+#data #databases #caching #pipelines #database-selection #sharding #partitioning #replication #search #serialization #database-operations

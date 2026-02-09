@@ -150,6 +150,13 @@ The bedrock of computer science. Everything in software engineering ultimately r
 - **Error Correction** — Hamming codes, Reed-Solomon, checksums
 - **Channel Capacity** — Shannon's theorem, noise
 
+### Queueing Theory
+- **Fundamentals** — Arrival rate (λ), service rate (μ), utilization (ρ = λ/μ), queue length, wait time, Kendall's notation (A/S/c)
+- **Little's Law** — L = λW (items in system = arrival rate × time in system), universally applicable regardless of distribution
+- **M/M/1 Queue** — Single server, Poisson arrivals, exponential service times, steady-state: mean wait = ρ / (μ(1−ρ)), diverges as ρ → 1
+- **M/M/c Queue** — Multiple servers, Erlang-C formula for probability of waiting, used for call center and thread pool sizing
+- **Applications** — Load balancer sizing, thread pool tuning (why pool size matters), capacity planning (saturation inflection point), autoscaling thresholds, understanding latency percentiles under load (why p99 explodes near saturation)
+
 ---
 
 #foundations #cs-fundamentals
