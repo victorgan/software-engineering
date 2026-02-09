@@ -49,10 +49,6 @@
   - [[Networking]] — TCP/IP, HTTP, DNS, TLS, Load Balancing, CDNs, WebSockets
   - [[Distributed Systems]] — Consensus, CAP Theorem, Replication, Sharding, Message Queues
   - [[Cloud and Containers]] — Docker, Kubernetes, Serverless, IaC
-  - [[AWS Services Guide]] — Compute, Storage, Databases, Networking, Messaging, ML, Security
-  - [[GCP Services Guide]] — Compute, Storage, Databases, Networking, Data Analytics, ML, Security
-  - [[Google Internal Technologies]] — Borg, Spanner, Bigtable, Dremel, Stubby, Zanzibar, BeyondCorp
-  - [[Google Internal → External Mapping]] — Internal ↔ Open Source ↔ GCP equivalents
 
 ---
 
@@ -128,6 +124,18 @@
   - [[Engineering Management]] — Team Topologies, Tech Lead vs Manager, Hiring, 1-on-1s, Planning
   - [[Engineering at Scale]] — Platform Engineering, Technical Governance, Staff Archetypes, Org Antipatterns
   - [[Career Development]] — IC vs Management Track, System Design Interviews, Open Source, Google Interview Prep
+
+---
+
+## ☁️ 11. Cloud Providers & Proprietary Systems
+*Vendor-specific services and internal platforms — proprietary instances of the concepts above.*
+
+- [[11 - Cloud Providers and Proprietary Systems MOC]]
+  - [[AWS Services Guide]] — Compute, Storage, Databases, Networking, Messaging, ML, Security
+  - [[GCP Services Guide]] — Compute, Storage, Databases, Networking, Data Analytics, ML, Security
+  - [[AWS vs GCP — Service Mapping]] — Side-by-side service equivalents
+  - [[Google Internal Technologies]] — Borg, Spanner, Bigtable, Dremel, Stubby, Zanzibar, BeyondCorp
+  - [[Google Internal → External Mapping]] — Internal ↔ Open Source ↔ GCP equivalents
 
 ---
 
