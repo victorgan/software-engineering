@@ -81,6 +81,53 @@ Software is built by people, for people, in organizations. The human side of eng
 - **Goodhart's Law** — When a measure becomes a target, it ceases to be a good measure
 - **Developer Productivity** — Qualitative + quantitative, avoid reductive metrics
 
+### Decision-Making
+- **RFCs / Design Docs** — Written proposals for major decisions, async review (see [[Technical Communication]])
+- **ADRs (Architecture Decision Records)** — Record decisions with context, alternatives, consequences (see [[Code Quality]])
+- **DACI Framework** — Driver, Approver, Contributors, Informed — clarify roles in decisions
+- **Reversible vs Irreversible Decisions** — "One-way doors" deserve more deliberation; "two-way doors" can be decided quickly (Bezos)
+- **Disagree and Commit** — Voice concerns, then fully commit to the group decision
+- **Decision Logs** — Track what was decided, why, and what was considered
+
+### Cross-Functional Collaboration
+- **Product-Engineering Partnership** — Shared understanding of user problems, trade-off discussions, saying no constructively
+- **Design-Engineering Handoff** — Design systems, component specs, prototyping together, Figma/Storybook
+- **Working with Data Teams** — Data contracts, shared schemas, analytics instrumentation (see [[Data Pipelines]])
+- **Working with Security Teams** — Threat modeling collaboration, security champions program (see [[Application Security]])
+- **Working with SRE / Platform Teams** — Service ownership boundaries, production readiness, on-call expectations (see [[Site Reliability Engineering]])
+
+### Conflict Resolution & Feedback
+- **Radical Candor** — Care personally, challenge directly (Kim Scott)
+- **SBI Feedback Model** — Situation, Behavior, Impact — structured feedback delivery
+- **Technical Disagreements** — Focus on data and tradeoffs, not preferences; prototype to resolve
+- **Escalation Paths** — When to escalate, how to escalate without undermining trust
+- **Difficult Conversations** — Assume good intent, separate behavior from identity, listen first
+
+---
+
+## [[Engineering at Scale]]
+
+### Scaling Engineering Organizations
+- **Dunbar's Numbers in Engineering** — Communication overhead grows O(n²), small teams stay effective
+- **Platform Engineering** — Internal developer platforms, golden paths, self-service infrastructure (see [[Cloud and Containers]])
+- **Inner Source** — Open-source practices within an organization, cross-team contributions
+- **Technical Governance** — Tech radar, standards bodies, RFCs for cross-cutting decisions
+- **Build vs Buy** — Framework for deciding: core competency? Time to market? Maintenance burden? Vendor risk?
+
+### Technical Leadership
+- **Staff Engineer Archetypes** — Tech Lead, Architect, Solver, Right Hand (Will Larson)
+- **Influence Without Authority** — Building trust, writing compelling proposals, showing results
+- **Sponsorship vs Mentorship** — Mentors advise; sponsors advocate for your promotion and visibility
+- **Technical Vision** — Defining where the architecture should go, building consensus, incremental migration
+- **Glue Work** — Essential non-promotable work (documentation, onboarding, coordination) — ensure it's recognized and shared
+
+### Organizational Antipatterns
+- **Bikeshedding** — Disproportionate time on trivial decisions (Parkinson's law of triviality)
+- **Not-Invented-Here Syndrome** — Rejecting external solutions in favor of building custom
+- **Resume-Driven Development** — Choosing technology for career advancement rather than problem fit
+- **Lava Flow** — Dead code and architecture that nobody dares remove
+- **Hero Culture** — Dependency on individual heroes for crises; fragile, leads to burnout
+
 ---
 
 ## [[Career Development]]
@@ -122,4 +169,15 @@ Software is built by people, for people, in organizations. The human side of eng
 
 ---
 
-#career #management #communication #culture
+### Google-Specific Interview Prep
+- **Coding Interviews** — Leetcode medium/hard, data structures + algorithms, optimal solutions expected, explain tradeoffs
+- **System Design Interviews** — Distributed systems focus (design Gmail, YouTube, Google Maps), emphasis on scale, data modeling, tradeoffs
+- **Behavioral Interviews (Googleyness & Leadership)** — STAR method, examples of ambiguity, collaboration, pushing back constructively
+- **Google's Hiring Process** — Phone screen → onsite (4-5 rounds) → hiring committee → team matching → offer review
+- **Leveling at Google** — L3 (SWE II) → L4 (SWE III, mid) → L5 (Senior) → L6 (Staff) → L7 (Senior Staff) → L8+ (Principal/Distinguished Fellow)
+- **Promo Packets** — Document impact, scope, complexity; peer/manager endorsement; calibration across org
+- **Google Culture** — Design docs, code readability process, 20% projects (historical), "Don't be evil" → "Do the right thing"
+
+---
+
+#career #management #communication #culture #leadership #collaboration

@@ -171,4 +171,50 @@ How you structure code and systems. Good design is what allows software to evolv
 
 ---
 
-#design #architecture #patterns #api
+## [[System Design Tradeoffs]]
+
+### Fundamental Tradeoffs
+- **Consistency vs Availability** — CAP theorem in practice; strong consistency costs availability under partition (see [[Distributed Systems]])
+- **Latency vs Throughput** — Batching improves throughput but increases per-request latency
+- **Simplicity vs Flexibility** — Generic systems handle more cases but are harder to understand and maintain
+- **Read vs Write Optimization** — Denormalization and caching speed reads at the cost of write complexity (see [[Data Modeling]])
+- **Cost vs Performance** — More resources improve performance with diminishing returns; serverless vs provisioned
+- **Coupling vs Autonomy** — Monoliths are coupled but consistent; microservices are autonomous but operationally complex
+
+### When to Choose What
+
+#### Monolith vs Microservices
+- **Choose Monolith** — Small team (<10 engineers), early-stage product, unclear domain boundaries, need to ship fast
+- **Choose Microservices** — Large org with multiple teams, well-understood domain, independent scaling needs, polyglot requirements
+- **Modular Monolith** — Best of both: monolith deployment, clean module boundaries, easy to split later
+
+#### SQL vs NoSQL
+- **Choose SQL** — Complex queries, joins, transactions, data integrity is critical, ad-hoc reporting (see [[Database Selection Guide]])
+- **Choose NoSQL** — Known access patterns, high write throughput, flexible schema, horizontal scaling, denormalized data
+
+#### REST vs GraphQL vs gRPC
+- **Choose REST** — Public APIs, broad client support, simple CRUD, caching matters (HTTP caching)
+- **Choose GraphQL** — Multiple client types (mobile, web) with different data needs, nested data, rapid frontend iteration
+- **Choose gRPC** — Service-to-service, low latency, streaming, strong typing, polyglot backend services
+
+#### Sync vs Async Communication
+- **Choose Sync (HTTP/gRPC)** — Low latency needed, simple request-response, strong consistency requirement
+- **Choose Async (Queues/Events)** — Decoupled services, eventual consistency acceptable, spike traffic handling, long-running tasks
+
+#### Build vs Buy
+- **Build** — Core competency, unique differentiator, no good existing solution, control is critical
+- **Buy/Use OSS** — Commodity problem, well-served by existing tools, team doesn't have domain expertise, speed to market
+
+### Design Review Checklist
+- **Scalability** — What happens at 10x, 100x current load? Where are the bottlenecks?
+- **Failure Modes** — What happens when each dependency fails? Is there graceful degradation? (see [[Reliability Patterns]])
+- **Data Consistency** — What consistency model is needed? What happens during network partition?
+- **Security** — What are the trust boundaries? How is auth handled? What data is sensitive? (see [[Application Security]])
+- **Observability** — How will you know it's working? What metrics, logs, traces? (see [[Observability]])
+- **Operability** — How is it deployed? Can it be rolled back? What does on-call look like? (see [[Site Reliability Engineering]])
+- **Cost** — What are the infrastructure costs? How does cost scale with usage?
+- **Migration** — How do you get from current state to proposed state without downtime?
+
+---
+
+#design #architecture #patterns #api #tradeoffs

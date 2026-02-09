@@ -65,6 +65,7 @@
   - [[Architectural Patterns]] — Monolith, Microservices, Event-Driven, Layered, Hexagonal, CQRS
   - [[API Design]] — REST, GraphQL, gRPC, WebSockets, API Versioning, Rate Limiting
   - [[Domain-Driven Design]] — Bounded Contexts, Aggregates, Entities, Value Objects, Ubiquitous Language
+  - [[System Design Tradeoffs]] — Consistency vs Availability, SQL vs NoSQL, Monolith vs Microservices, Build vs Buy
 
 ---
 
@@ -101,6 +102,9 @@
   - [[Authentication and Authorization]] — OAuth 2.0, OIDC, JWT, RBAC, ABAC, SSO, MFA
   - [[Application Security]] — OWASP Top 10, Input Validation, XSS, CSRF, SQL Injection, SSRF
   - [[Infrastructure Security]] — Network Security, Secrets Management, Zero Trust, Container Security
+  - [[Supply Chain Security]] — SLSA, SBOM, Dependency Scanning, Artifact Signing
+  - [[Compliance & Privacy]] — GDPR, SOC 2, HIPAA, PCI-DSS, Privacy Engineering
+  - [[Security Operations]] — Vulnerability Management, SIEM, Penetration Testing, Red/Blue Team
 
 ---
 
@@ -112,6 +116,7 @@
   - [[Deep Learning]] — Neural Networks, CNNs, RNNs, Transformers, GANs, Diffusion Models
   - [[Natural Language Processing]] — Tokenization, Embeddings, LLMs, RAG, Fine-Tuning, Prompt Engineering
   - [[MLOps]] — Model Serving, Feature Stores, Experiment Tracking, Model Monitoring, Data Versioning
+  - [[ML System Design]] — Batch vs Real-Time, Recommendation Systems, Search Ranking, Responsible AI
 
 ---
 
@@ -121,7 +126,8 @@
 - [[10 - Human and Organizational MOC]]
   - [[Technical Communication]] — Documentation, ADRs, RFCs, Diagramming, Writing for Engineers
   - [[Engineering Management]] — Team Topologies, Tech Lead vs Manager, Hiring, 1-on-1s, Planning
-  - [[Career Development]] — IC vs Management Track, System Design Interviews, Open Source, Building Expertise
+  - [[Engineering at Scale]] — Platform Engineering, Technical Governance, Staff Archetypes, Org Antipatterns
+  - [[Career Development]] — IC vs Management Track, System Design Interviews, Open Source, Google Interview Prep
 
 ---
 

@@ -172,4 +172,43 @@ Teaching machines to learn from data. Increasingly core to software engineering 
 
 ---
 
-#ml #ai #deep-learning #nlp #llm #mlops
+## [[ML System Design]]
+
+### ML System Design Patterns
+- **Batch Prediction** — Pre-compute predictions offline, serve from cache/DB. Low latency at serving time but stale predictions.
+- **Real-Time Prediction** — Model serves predictions on demand. Fresh results but latency/cost constrained.
+- **Online Learning** — Model updates continuously from incoming data. Good for rapidly changing patterns (recommendations, fraud).
+- **Embedding-Based Retrieval** — Encode items as vectors, use approximate nearest neighbor (ANN) for retrieval. Powers recommendation and search systems.
+- **Two-Tower Model** — Separate encoders for query and item, dot product for scoring. Used in recommendation/search at scale (YouTube, Google).
+- **Feature Pipeline Pattern** — Separate feature computation from model serving. Feature store provides consistency between training and inference.
+- **Human-in-the-Loop** — Active learning, model suggests + human reviews, continuous improvement. Used in content moderation, medical diagnosis.
+
+### ML System Design Interview Problems
+- **Recommendation System** — Candidate generation → ranking → re-ranking, collaborative filtering, content-based, hybrid
+- **Search Ranking** — Query understanding, retrieval, ranking (learning-to-rank), re-ranking, evaluation (NDCG, MRR)
+- **Fraud Detection** — Imbalanced classes, real-time scoring, feature engineering from transaction graphs, false positive cost
+- **Ads Click Prediction** — Massive scale, real-time bidding, calibration, explore/exploit
+- **Content Moderation** — Multi-modal (text + image + video), multi-label classification, latency constraints, human review workflow
+- **Newsfeed Ranking** — Multi-objective optimization (engagement + quality + diversity), freshness, personalization
+
+### Responsible AI
+- **Bias & Fairness** — Training data bias, demographic parity, equalized odds, fairness metrics
+- **Explainability** — SHAP, LIME, attention visualization, feature importance, model cards
+- **Robustness** — Adversarial examples, distribution shift, out-of-distribution detection
+- **Privacy in ML** — Federated learning (train on device, aggregate gradients), differential privacy, membership inference attacks
+- **AI Safety** — Alignment problem, reward hacking, specification gaming, constitutional AI, RLHF guardrails
+- **Model Cards** — Documentation of model purpose, performance across groups, limitations, intended use
+- **EU AI Act** — Risk-based classification (unacceptable, high, limited, minimal), transparency requirements
+
+### Computer Vision (Beyond CNNs)
+- **Object Detection** — YOLO (real-time), Faster R-CNN (two-stage), DETR (Transformer-based), anchor-free methods
+- **Semantic Segmentation** — Per-pixel classification, U-Net, DeepLab, Mask R-CNN (instance segmentation)
+- **Vision Transformers (ViT)** — Apply Transformer architecture to image patches, competitive with CNNs at scale
+- **Multimodal Models** — CLIP (text + image), Flamingo, GPT-4V — align vision and language representations
+- **Video Understanding** — Temporal modeling, action recognition, video captioning
+- **3D Vision** — NeRF (Neural Radiance Fields), depth estimation, point clouds, 3D reconstruction
+- **Applications** — Autonomous driving, medical imaging, satellite imagery, AR/VR, quality inspection
+
+---
+
+#ml #ai #deep-learning #nlp #llm #mlops #system-design #responsible-ai #computer-vision

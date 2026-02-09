@@ -172,4 +172,66 @@ Protecting systems, data, and users from harm. Security is not a feature — it'
 
 ---
 
-#security #cryptography #authentication #owasp
+## [[Supply Chain Security]]
+
+### Software Supply Chain
+- **Dependency Vulnerabilities** — Transitive dependencies, CVE databases, automated scanning
+- **Dependency Pinning** — Lock files (package-lock.json, Pipfile.lock, go.sum), reproducible builds
+- **SLSA Framework (Supply-chain Levels for Software Artifacts)** — Levels 1-4 of build integrity, provenance attestation
+- **SBOM (Software Bill of Materials)** — CycloneDX, SPDX formats; know what's in your software
+- **Artifact Signing** — Sigstore, cosign, Notary — verify artifact integrity and provenance
+- **Typosquatting** — Malicious packages with similar names on registries (npm, PyPI)
+- **Dependency Confusion** — Private package names registered publicly, attacker's version installed
+
+### CI/CD Security
+- **Pipeline Hardening** — Least privilege for CI, no long-lived secrets, ephemeral runners
+- **OIDC for Cloud Auth** — Short-lived tokens instead of static credentials (GitHub Actions → AWS/GCP)
+- **Code Signing** — Sign commits (GPG), sign artifacts, verify before deploy
+- **Immutable Artifacts** — Build once, promote through environments, never rebuild (see [[CI-CD]])
+
+---
+
+## [[Compliance & Privacy]]
+
+### Regulatory Frameworks
+- **GDPR (EU)** — Data subject rights (access, erasure, portability), DPO, consent, breach notification within 72h
+- **CCPA/CPRA (California)** — Consumer privacy rights, opt-out of data sale, right to know
+- **SOC 2** — Trust service criteria: security, availability, processing integrity, confidentiality, privacy
+- **HIPAA (US Healthcare)** — Protected Health Information (PHI), BAA agreements, encryption requirements
+- **PCI-DSS** — Payment card data handling, network segmentation, encryption, regular assessments
+- **ISO 27001** — Information security management system (ISMS), risk-based approach
+
+### Privacy Engineering
+- **Privacy by Design** — Build privacy into architecture from the start, not as an afterthought
+- **Data Minimization** — Collect only what you need, retain only as long as necessary
+- **Anonymization vs Pseudonymization** — True anonymization is irreversible; pseudonymization is reversible with a key
+- **Differential Privacy** — Mathematical guarantee that individual data points don't significantly affect output
+- **Consent Management** — Granular consent, easy withdrawal, consent records
+- **Right to Erasure** — Soft delete vs hard delete, propagation to backups, third-party data processors
+
+---
+
+## [[Security Operations]]
+
+### Vulnerability Management
+- **CVE Tracking** — Common Vulnerabilities and Exposures, NVD database, CVSS scoring
+- **Patch Management** — Prioritize by severity (CVSS), apply within SLA, automated patching where possible
+- **Bug Bounty Programs** — Crowdsourced vulnerability discovery (HackerOne, Bugcrowd)
+- **Responsible Disclosure** — Coordinated vulnerability disclosure, 90-day deadlines
+
+### Security Monitoring
+- **SIEM (Security Information and Event Management)** — Splunk, Sentinel, Elastic Security — centralized security event analysis
+- **IDS/IPS** — Intrusion detection/prevention systems, network-based and host-based
+- **Honeypots** — Decoy systems to detect and study attackers
+- **Security Logging** — Authentication events, authorization failures, admin actions, data access (see [[Observability]])
+
+### Penetration Testing
+- **Types** — Black box (no knowledge), white box (full access), gray box (partial)
+- **Methodology** — Reconnaissance → scanning → exploitation → post-exploitation → reporting
+- **Tools** — Burp Suite, OWASP ZAP, Nmap, Metasploit, Nuclei
+- **Frequency** — Annual at minimum, after major changes, for compliance requirements
+- **Red Team vs Blue Team** — Red team: attack simulation. Blue team: defense and detection. Purple team: collaborative improvement.
+
+---
+
+#security #cryptography #authentication #owasp #supply-chain #compliance #privacy
