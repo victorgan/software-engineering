@@ -60,6 +60,17 @@ Storing, retrieving, transforming, and moving data. Arguably the most critical c
 - **YugabyteDB** — Open source, distributed SQL, Postgres-compatible, tunable consistency, multi-region.
 - **AlloyDB** — Google Cloud managed Postgres-compatible, columnar engine for analytics, Postgres wire protocol.
 
+### Partitioning (Single-Node)
+- **Table Partitioning** — Split a large table into smaller physical pieces while presenting one logical table
+- **Range Partitioning** — Partition by value range (e.g., date ranges, ID ranges). Good for time-series, archival. Risk: uneven partition sizes.
+- **List Partitioning** — Partition by specific values (e.g., region = 'US', 'EU', 'APAC'). Good for geographic or categorical splits.
+- **Hash Partitioning** — Partition by hash of a column. Even distribution, but range queries span all partitions.
+- **Composite Partitioning** — Combine methods (e.g., range by year, then hash by user_id within each year)
+- **Partition Pruning** — Query planner skips irrelevant partitions, major performance win for large tables
+- **Postgres Partitioning** — Declarative partitioning (PARTITION BY RANGE/LIST/HASH), partition-wise joins, partition-wise aggregation
+- **MySQL Partitioning** — Supports RANGE, LIST, HASH, KEY partitioning; less flexible than Postgres
+- **When to Partition** — Tables exceeding tens of millions of rows, time-based data with retention policies, queries that naturally filter on the partition key
+
 ### Choosing a Relational Database — Tradeoffs
 - **Open Source vs Commercial** — Postgres/MySQL are free, avoid vendor lock-in, large community. Oracle/SQL Server have dedicated support, enterprise tooling, but expensive licensing and lock-in.
 - **Postgres vs MySQL** — Postgres: richer SQL features, better extensibility, stricter correctness, JSONB. MySQL: simpler operations, faster simple reads, wider hosting support, more forgiving defaults.
@@ -151,6 +162,56 @@ Storing, retrieving, transforming, and moving data. Arguably the most critical c
 
 ---
 
+## [[Sharding and Partitioning]]
+
+*Partitioning splits data within a single database instance. Sharding distributes data across multiple database instances. Both reduce per-node data size; sharding also distributes load. See [[Distributed Systems]] for the theoretical foundations (CAP, consistency models, consensus).*
+
+### Sharding Strategies
+- **Range-Based Sharding** — Assign key ranges to shards (e.g., users A-M → shard 1, N-Z → shard 2). Simple to understand. Risk: hotspots if access is uneven (e.g., new users cluster in one range).
+- **Hash-Based Sharding** — Hash the shard key, mod by shard count. Even distribution. Downside: range queries must hit all shards (scatter-gather).
+- **Consistent Hashing** — Minimizes data movement when adding/removing shards. Used by DynamoDB, Cassandra, Riak. Virtual nodes improve balance.
+- **Directory-Based Sharding** — A lookup table maps keys to shards. Maximum flexibility but the directory is a single point of failure and bottleneck.
+- **Geographic Sharding** — Shard by region to keep data close to users. Reduces latency, aids data residency compliance (GDPR). Complicates global queries.
+
+### Choosing a Shard Key
+- **High Cardinality** — Key should have many distinct values to distribute evenly (user_id good, country bad)
+- **Even Distribution** — Avoid keys that create hotspots (e.g., timestamp as shard key → all writes hit latest shard)
+- **Query Alignment** — Most queries should include the shard key to avoid scatter-gather across all shards
+- **Immutability** — Shard key should rarely change; changing it means moving data between shards
+- **Compound Shard Keys** — Combine fields (e.g., tenant_id + user_id) for multi-tenant systems
+
+### Sharding Challenges
+- **Cross-Shard Queries** — Joins across shards are expensive or impossible; requires scatter-gather or denormalization
+- **Cross-Shard Transactions** — ACID across shards requires 2PC or saga pattern; most sharded systems avoid this (see [[Distributed Systems]])
+- **Rebalancing** — Adding shards requires data migration; consistent hashing minimizes movement, but it's still operationally complex
+- **Hotspots** — Uneven access patterns concentrate load on specific shards; monitor and split hot shards
+- **Operational Complexity** — Schema changes across shards, backup coordination, monitoring per-shard health
+- **Referential Integrity** — Foreign keys can't span shards; enforce at application level or colocate related data
+
+### Sharding Tools & Approaches
+- **Application-Level Sharding** — Application code decides which shard to query. Full control but couples business logic to data distribution.
+- **Vitess** — MySQL sharding middleware (created at YouTube/Google). Transparent sharding, connection pooling, online schema changes. Powers YouTube, Slack, Square.
+- **Citus** — Postgres extension for distributed tables. Colocated joins, distributed queries, reference tables. Now part of Azure Cosmos DB for PostgreSQL.
+- **ProxySQL / MaxScale** — MySQL proxies that can route queries to shards based on rules
+- **Native Distributed Databases** — CockroachDB, YugabyteDB, Cloud Spanner, TiDB — handle sharding internally with automatic rebalancing. Trade: simpler operations but less control and some latency overhead.
+
+### Sharding vs Alternatives
+- **Vertical Scaling First** — Modern hardware (64+ cores, TBs of RAM, NVMe SSDs) handles more than most assume. Postgres on large instance handles millions of rows. Don't shard until you must.
+- **Read Replicas** — If reads are the bottleneck, replicas may be enough without sharding (see Replication below)
+- **Partitioning** — If data is large but queries are naturally scoped (by time, tenant), table partitioning within one instance may suffice
+- **Caching Layer** — If read latency is the issue, a cache (Redis, Memcached) in front of the DB may eliminate the need to shard (see [[Caching]])
+- **Archive Old Data** — If table size is the problem but most queries hit recent data, archive old rows to cold storage
+
+### Replication (for Data Management)
+- **Read Replicas** — Copies of the primary that serve reads. Offload read traffic. Replication lag means stale reads.
+- **Synchronous vs Asynchronous Replication** — Sync: no data loss on failover, higher write latency. Async: low latency, but risk of data loss on failover.
+- **Streaming Replication (Postgres)** — WAL-based, continuous, configurable sync/async
+- **MySQL Replication** — Binary log (binlog) replication, GTID-based for consistency
+- **Multi-Primary / Multi-Master** — Multiple writable nodes. Requires conflict resolution (last-writer-wins, CRDTs, application-level). Used in Galera Cluster, Aurora Multi-Master.
+- **Logical Replication** — Replicate specific tables/rows, cross-version, cross-platform (Postgres logical replication, Debezium CDC)
+
+---
+
 ## [[Data Modeling]]
 
 ### Conceptual Modeling
@@ -237,4 +298,4 @@ Storing, retrieving, transforming, and moving data. Arguably the most critical c
 
 ---
 
-#data #databases #caching #pipelines #database-selection
+#data #databases #caching #pipelines #database-selection #sharding #partitioning #replication
