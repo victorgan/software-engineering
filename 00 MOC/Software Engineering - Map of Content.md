@@ -160,12 +160,12 @@ This vault organizes knowledge at four levels of specificity. Each MOC follows t
 | 1 | **Domain** | Broadest subject area. Each numbered section is a domain. | Data Structures |
 | 2 | **Category** | A grouping within a domain. Represented as H2/H3 headings in MOCs. | Linear Structures |
 | 3 | **Concept** | A specific, nameable thing. The bolded terms in bullet points. | Arrays |
-| 4 | **Property** | A characteristic or detail of a concept. The descriptions after the em dash. | contiguous memory, O(1) random access |
+| 4 | **Sub-Concept** | A variant, detail, or sub-topic within a concept. The descriptions after the em dash. | contiguous memory, O(1) random access, B-Trees, DAGs |
 
-**Domain → Category → Concept → Property**
+**Domain → Category → Concept → Sub-Concept**
 
 This terminology comes from ontology (knowledge representation). Alternate terms you may encounter:
 - Domain = field, discipline
 - Category = class, subclass, subdivision
 - Concept = topic, entity
-- Property = attribute, facet, characteristic
+- Sub-Concept = variant, detail, attribute, facet
