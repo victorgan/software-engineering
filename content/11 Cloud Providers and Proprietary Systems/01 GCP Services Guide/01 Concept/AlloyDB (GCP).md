@@ -1,4 +1,4 @@
-# AlloyDB
+# AlloyDB (GCP)
 
 > <- Back to [[GCP Databases]]
 
