@@ -14,7 +14,7 @@ const config: QuartzConfig = {
     enablePopovers: true,
     analytics: null,
     locale: "en-US",
-    baseUrl: "gan.report/software",
+    baseUrl: "software.gan.report",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
@@ -86,6 +86,7 @@ const config: QuartzConfig = {
       Plugin.Static(),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
+      Plugin.CNAME(),
       // Plugin.CustomOgImages(), // Commented out to speed up build with 3k+ files
     ],
   },
