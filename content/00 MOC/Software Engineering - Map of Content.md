@@ -38,7 +38,7 @@
   - [[Data Modeling]] — [[ER Diagrams]], Schema Design, [[Denormalization]], [[Migrations]]
   - [[Caching]] — Strategies, [[Redis]], [[Memcached]], [[CDN Caching]], [[Cache Invalidation]]
   - [[Data Pipelines]] — [[ETL vs ELT|ETL/ELT]], Streaming vs Batch, Kafka, [[Data Lake|Data Lakes]], [[Data Warehouse|Data Warehouses]]
-  - Database Operations — [[Connection Pooling]], Query Analysis, Maintenance, [[Backup and Restore|Backups]], Schema Migrations
+  - [[Database Operations]] — [[Connection Pooling]], Query Analysis, Maintenance, [[Backup and Restore|Backups]], Schema Migrations
   - Search Systems — Inverted Indexes, Text Analysis, Ranking, Full-Text Search, Vector Search
   - Data Serialization Formats — JSON, Protobuf, Avro, Parquet, Arrow, Schema Registries
 
