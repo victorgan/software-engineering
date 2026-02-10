@@ -1,1 +1,8 @@
 .DS_Store
+
+# Quartz
+node_modules/
+public/
+.quartz-cache/
+tsconfig.tsbuildinfo
+prof/
