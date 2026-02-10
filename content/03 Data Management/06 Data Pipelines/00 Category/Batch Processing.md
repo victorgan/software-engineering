@@ -8,6 +8,8 @@ Processing large volumes of data in discrete jobs that run on a schedule. Suited
 
 - [[Apache Hadoop]]
 - [[Apache Spark]]
+- [[Apache Beam]]
+- [[Trino]]
 - [[dbt (data build tool)]]
 - [[Airflow]]
 
