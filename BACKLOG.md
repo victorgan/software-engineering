@@ -8,6 +8,12 @@ hotspots when it's mentioned
 
 Integrate knowledge from the following online sources:
 
+  Data Engineering
+
+  - https://www.ssp.sh/brain/data-engineering/ -- A comprehensive knowledge base on data
+  engineering topics. Useful reference for enriching the Data Management and Data Pipelines
+  sections.
+
   Comprehensive SE Knowledge Bases
 
   - https://www.computer.org/education/bodies-of-knowledge/software-engineering -- The most
