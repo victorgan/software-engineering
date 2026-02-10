@@ -1,3 +1,13 @@
 {
-  "promptDelete": false
+  "obsidianCss": false,
+  "alwaysUpdateLinks": true,
+  "promptDelete": false,
+  "vimMode": true,
+  "fileSortOrder": "alphabetical",
+  "attachmentFolderPath": "",
+  "showLineNumber": true,
+  "legacyEditor": false,
+  "livePreview": true,
+  "communityPluginSortOrder": "download",
+  "newFileLocation": "current"
 }
